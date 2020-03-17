@@ -1,4 +1,5 @@
 #include "MainWindow.hpp"
+#include <iostream>
 
 MainWindow::MainWindow() {
 
@@ -12,10 +13,13 @@ MainWindow::MainWindow() {
   this->mHBoxTitle.set_center_widget(this->mFrameTitle);
   
   this->mHBoxControls = Gtk::Box(Gtk::ORIENTATION_HORIZONTAL);
-  this->mButtonStartTimer = Gtk::Button("Start Work");
-  this->mButtonStartTimer.set_size_request(80, 32);
-  this->mHBoxControls.set_center_widget(this->mButtonStartTimer);
+  this->mButtonTimer = Gtk::Button("Start Work");
+  this->mButtonTimer.set_size_request(80, 32);
+  this->mHBoxControls.set_center_widget(this->mButtonTimer);
   this->mHBoxControls.set_spacing(10);
+
+  this->mButtonTimer.signal_clicked().connect(sigc::mem_fun(*this,
+								 &MainWindow::timer_button_clicked));
 
   this->mLabelClock = Gtk::Label();
   this->mLabelClock.set_markup("<span font_desc='Sans Bold 50'>30 mins </span>");
@@ -33,5 +37,11 @@ MainWindow::MainWindow() {
   show_all_children();  
 }
 
+void MainWindow::timer_button_clicked() {
+  this->mLabelClock.set_markup("<span font_desc='Sans Bold 45'>Do not disturb.\nWork in progress!</span>");
+  this->mButtonTimer.set_label("Take a break");
+}
+
 MainWindow::~MainWindow() {
+  std::cout << "MainWindow deallocating\n";
 }

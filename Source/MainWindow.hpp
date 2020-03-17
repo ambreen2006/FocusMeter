@@ -21,10 +21,13 @@ protected:
   Gtk::Label mLabelTitle;
   Gtk::Frame mFrameTitle;
 
-  Gtk::Button mButtonStartTimer;
+  Gtk::Button mButtonTimer;
 
   Gtk::Label mLabelClock;
   Gtk::Frame mFrameClock;
+
+  void timer_button_clicked();
+  
 };
 
 #endif // GTKMM_MAINWINDOW_HPP
