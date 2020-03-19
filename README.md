@@ -13,4 +13,6 @@ Change directory to 'Debug'
 3. ./Source/FocusMeterApp
 
 #Valgrind
-valgrind --tool=memcheck --leak-check=full --leak-resolution=high --num-callers=20 --log-file=vgdump 
+
+valgrind --tool=memcheck --leak-check=full --leak-resolution=high --num-callers=20 --log-file=vgdump   ./Source/FocusMeterApp
+
