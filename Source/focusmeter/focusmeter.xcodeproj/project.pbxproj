@@ -1,0 +1,341 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8D17E7AB242308CE00684743 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17E79E242307CC00684743 /* main.cpp */; };
+		8D17E7B3242308E300684743 /* SQLDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17E7AE242308E300684743 /* SQLDatabase.cpp */; };
+		8D17E7B4242308E300684743 /* FMController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17E7B1242308E300684743 /* FMController.cpp */; };
+		8D17E7BA24230DC600684743 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D17E7B624230CED00684743 /* libsqlite3.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8D17E799242307CC00684743 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8D17E79B242307CC00684743 /* focusmeter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = focusmeter; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D17E79E242307CC00684743 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8D17E7AE242308E300684743 /* SQLDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SQLDatabase.cpp; sourceTree = "<group>"; };
+		8D17E7AF242308E300684743 /* SQLDatabase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SQLDatabase.hpp; sourceTree = "<group>"; };
+		8D17E7B1242308E300684743 /* FMController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMController.cpp; sourceTree = "<group>"; };
+		8D17E7B2242308E300684743 /* FMController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FMController.hpp; sourceTree = "<group>"; };
+		8D17E7B624230CED00684743 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8D17E7B824230D1900684743 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		8DE1BD5824243904009BB312 /* ResourceHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourceHandler.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D17E798242307CC00684743 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D17E7BA24230DC600684743 /* libsqlite3.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8D17E792242307CC00684743 = {
+			isa = PBXGroup;
+			children = (
+				8D17E7AC242308E300684743 /* CrossPlatform */,
+				8D17E79D242307CC00684743 /* FocusMeter */,
+				8D17E79C242307CC00684743 /* Products */,
+				8D17E7B524230CEC00684743 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8D17E79C242307CC00684743 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D17E79B242307CC00684743 /* focusmeter */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8D17E79D242307CC00684743 /* FocusMeter */ = {
+			isa = PBXGroup;
+			children = (
+				8D17E79E242307CC00684743 /* main.cpp */,
+			);
+			path = FocusMeter;
+			sourceTree = "<group>";
+		};
+		8D17E7AC242308E300684743 /* CrossPlatform */ = {
+			isa = PBXGroup;
+			children = (
+				8DE1BD57242438E8009BB312 /* Utils */,
+				8D17E7AD242308E300684743 /* Database */,
+				8D17E7B0242308E300684743 /* Controller */,
+			);
+			name = CrossPlatform;
+			path = ../CrossPlatform;
+			sourceTree = "<group>";
+		};
+		8D17E7AD242308E300684743 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				8D17E7AE242308E300684743 /* SQLDatabase.cpp */,
+				8D17E7AF242308E300684743 /* SQLDatabase.hpp */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		8D17E7B0242308E300684743 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8D17E7B1242308E300684743 /* FMController.cpp */,
+				8D17E7B2242308E300684743 /* FMController.hpp */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8D17E7B524230CEC00684743 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D17E7B824230D1900684743 /* libsqlite3.0.tbd */,
+				8D17E7B624230CED00684743 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DE1BD57242438E8009BB312 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8DE1BD5824243904009BB312 /* ResourceHandler.hpp */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D17E79A242307CC00684743 /* focusmeter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D17E7A2242307CC00684743 /* Build configuration list for PBXNativeTarget "focusmeter" */;
+			buildPhases = (
+				8D17E797242307CC00684743 /* Sources */,
+				8D17E798242307CC00684743 /* Frameworks */,
+				8D17E799242307CC00684743 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = focusmeter;
+			productName = FocusMeter;
+			productReference = 8D17E79B242307CC00684743 /* focusmeter */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D17E793242307CC00684743 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Ambreen Haleem";
+				TargetAttributes = {
+					8D17E79A242307CC00684743 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 8D17E796242307CC00684743 /* Build configuration list for PBXProject "FocusMeter" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8D17E792242307CC00684743;
+			productRefGroup = 8D17E79C242307CC00684743 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D17E79A242307CC00684743 /* focusmeter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D17E797242307CC00684743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D17E7AB242308CE00684743 /* main.cpp in Sources */,
+				8D17E7B3242308E300684743 /* SQLDatabase.cpp in Sources */,
+				8D17E7B4242308E300684743 /* FMController.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8D17E7A0242307CC00684743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8D17E7A1242307CC00684743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8D17E7A3242307CC00684743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../CrossPlatform\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8D17E7A4242307CC00684743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../CrossPlatform\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8D17E796242307CC00684743 /* Build configuration list for PBXProject "FocusMeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D17E7A0242307CC00684743 /* Debug */,
+				8D17E7A1242307CC00684743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D17E7A2242307CC00684743 /* Build configuration list for PBXNativeTarget "focusmeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D17E7A3242307CC00684743 /* Debug */,
+				8D17E7A4242307CC00684743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D17E793242307CC00684743 /* Project object */;
+}
