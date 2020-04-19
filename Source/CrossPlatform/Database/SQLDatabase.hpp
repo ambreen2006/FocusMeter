@@ -32,7 +32,7 @@ struct Reader {
     int getInt(int const column = 0) const noexcept {
         return sqlite3_column_int(static_cast<T const *>(this)->Get(), column);
     }
-    
+
     char const * getString(int const column = 0) const noexcept {
         return reinterpret_cast<char const *>(sqlite3_column_text(static_cast<T const *>(this)->Get(), column));
     }
@@ -110,6 +110,14 @@ public:
             std::cout << "Error binding int\n";
         }
     }
+    
+    void Bind(int const index, double const value) const
+     {
+         if (SQLITE_OK != sqlite3_bind_double(Get(), index, value))
+         {
+             std::cout << "Error binding double\n";
+         }
+     }
 
     void bind(int const index, char const * const value, int size = -1) const {
         if (SQLITE_OK != sqlite3_bind_text(Get(), index, value, size, SQLITE_TRANSIENT)) {

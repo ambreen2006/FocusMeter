@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8D17E7AB242308CE00684743 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17E79E242307CC00684743 /* main.cpp */; };
+		8D17E7AB242308CE00684743 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8D17E79E242307CC00684743 /* main.mm */; };
 		8D17E7B3242308E300684743 /* SQLDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17E7AE242308E300684743 /* SQLDatabase.cpp */; };
 		8D17E7B4242308E300684743 /* FMController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8D17E7B1242308E300684743 /* FMController.cpp */; };
 		8D17E7BA24230DC600684743 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D17E7B624230CED00684743 /* libsqlite3.tbd */; };
@@ -27,7 +27,7 @@
 
 /* Begin PBXFileReference section */
 		8D17E79B242307CC00684743 /* focusmeter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = focusmeter; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D17E79E242307CC00684743 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8D17E79E242307CC00684743 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		8D17E7AE242308E300684743 /* SQLDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SQLDatabase.cpp; sourceTree = "<group>"; };
 		8D17E7AF242308E300684743 /* SQLDatabase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SQLDatabase.hpp; sourceTree = "<group>"; };
 		8D17E7B1242308E300684743 /* FMController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FMController.cpp; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		8D17E79D242307CC00684743 /* FocusMeter */ = {
 			isa = PBXGroup;
 			children = (
-				8D17E79E242307CC00684743 /* main.cpp */,
+				8D17E79E242307CC00684743 /* main.mm */,
 			);
 			path = FocusMeter;
 			sourceTree = "<group>";
@@ -178,7 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D17E7AB242308CE00684743 /* main.cpp in Sources */,
+				8D17E7AB242308CE00684743 /* main.mm in Sources */,
 				8D17E7B3242308E300684743 /* SQLDatabase.cpp in Sources */,
 				8D17E7B4242308E300684743 /* FMController.cpp in Sources */,
 			);
@@ -278,7 +278,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -300,8 +300,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../CrossPlatform\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -309,8 +311,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../CrossPlatform\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
 		};
