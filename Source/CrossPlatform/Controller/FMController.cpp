@@ -24,7 +24,7 @@ FMController::FMController(std::string const & path_str):
 
 void FMController::create() {
     std::vector<std::string> tables = {"CREATE TABLE PROJECTS (NAME TEXT NOT NULL, DESCRIPTION TEXT NOT NULL)",
-                                       "CREATE TABLE TRACKS (NAME TEXT NOT NULL, START_TIME REAL)"
+                                       "CREATE TABLE TRACKS (NAME TEXT NOT NULL, START_TIME REAL, END_TIME REAL)"
     };
     
     Statement createStmt;
@@ -50,40 +50,82 @@ void FMController::executeCommand(int argc, const char *argv[]) {
         this->addProjects(projectName, projectDescription);
     } else if (0 == command.compare("time")) {
         if (argc < 3) {
-            std::cout << "time <project-name>";
+            std::cout << "time <project-name>\n";
             return;
         }
         std::string projectName(argv[2]);
         this->startTimeForProject(projectName);
+    } else if (0 == command.compare("stop")) {
+      if (argc < 3) {
+	std::cout << "stop <project-name>\n";
+	return;
+      }
+      std::string projectName(argv[2]);
+      this->stopTimeForProject(projectName);
+    } else if (0 == command.compare("latest")) {
+      if (argc < 3) {
+	std::cout << "latest <project-name>\n";
+	return;
+      }
+      std::string projectName(argv[2]);
+      this->showLatestDuration(projectName);
     }
 }
 
 void FMController::addProjects(std::string const& name, std::string const& description) {
+
     Statement stmt;
     stmt.prepare(this->mDB, "INSERT INTO PROJECTS VALUES (?1, ?2)", name, description);
     stmt.execute();
 }
 
-void FMController::startTimeForProject(std::string const& name) {
-    
+void FMController::stopTimeForProject(std::string const& name) {
+
     auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
     
     Statement stmt;
-    stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2)", name, (const double)t);
+    stmt.prepare(this->mDB, "UPDATE TRACKS SET END_TIME = ?1 WHERE NAME = ?2", (const double)t, name);
     stmt.execute();
     std::cout << "Done\n";
-    /*
-    std::this_thread::sleep_for(std::chrono::seconds(3));
-    auto stop = std::chrono::system_clock::now();
-    auto start = std::chrono::system_clock::from_time_t(t);
-    auto diff = stop - start;
-    std::cout << std::chrono::duration_cast<std::chrono::seconds>(diff).count() << std::endl;
-    
-    //Statement stmt;
-    //stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2)", <#Values &&values...#>);*/
 }
 
+void FMController::startTimeForProject(std::string const& name) {
+   
+    auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
+    
+    Statement stmt;
+    stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2, NULL)", name, (const double)t);
+    stmt.execute();
+    std::cout << "Done\n";
+}
+
+void FMController::showLatestDuration(std::string const& name) {
+  
+  Statement stmt;
+  stmt.prepare(this->mDB, "SELECT NAME, MAX(START_TIME), END_TIME FROM TRACKS WHERE NAME = ?1", name);
+  
+  for (Row r : stmt) {
+    double s_time = r.getInt(1);
+    double e_time = r.getInt(2);
+    std::cout << r.getString(0) << " " << r.getInt(1) << " " << r.getInt(2) <<  "\n";
+
+    if (e_time != 0) {
+      double diff = e_time - s_time;
+      int factor = 3600;
+      std::string metrics = "hours";
+      if (diff < factor) {
+	factor = 60;
+	metrics = "minutes";
+      }
+      
+      std::cout << "Latest time spent " << diff/factor << " " << metrics << "\n";
+    }
+  }
+  std::cout << "Done\n";
+}
+
+
 FMController::~FMController() {
-    std::cout << "FMController deconstruction\n";
 }
