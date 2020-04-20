@@ -1,14 +1,17 @@
 #include <sqlite3.h>
 #include <iostream>
 #include "../Utils/ResourceHandler.hpp"
+#include "../Utils/Settings.hpp"
 
 class Connection {
 
   struct ConnectionHandlerTraits : ResourceHandleTraits<sqlite3 *> {
-      static void Close(Type value) noexcept {
-	  std::cout << "Closing sqlite3 connection" << std::endl;
-	  sqlite3_close(value);
+    static void Close(Type value) noexcept {
+      if (DEBUG_MODE) {
+	std::cout << "Closing sqlite3 connection" << std::endl;
       }
+      sqlite3_close(value);
+    }
   };
 
   using ConnectionHandle = ResourceHandle<ConnectionHandlerTraits>;
@@ -31,6 +34,10 @@ template <typename T>
 struct Reader {
   int getInt(int const column = 0) const noexcept {
     return sqlite3_column_int(static_cast<T const *>(this)->Get(), column);
+  }
+
+  long long getLong(int const column = 0) const noexcept {
+    return sqlite3_column_int64(static_cast<T const *>(this)->Get(), column);
   }
 
   char const * getString(int const column = 0) const noexcept {
@@ -110,12 +117,17 @@ public:
 	  std::cout << "Error binding int\n";
         }
   }
-    
-  void Bind(int const index, double const value) const
-  {
+
+  void bind(int const index, double const value) const {
        if (SQLITE_OK != sqlite3_bind_double(Get(), index, value)) {
 	 std::cout << "Error binding double\n";
        }
+  }
+
+  void bind(int const index, long long const value) const {
+    if (SQLITE_OK != sqlite3_bind_int64(Get(), index, value)) {
+	std::cout << "Error binding int64\n";
+    }
   }
 
   void bind(int const index, char const * const value, int size = -1) const {

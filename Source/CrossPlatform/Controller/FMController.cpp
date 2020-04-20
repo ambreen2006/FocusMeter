@@ -23,10 +23,10 @@ FMController::FMController(std::string const & path_str):
 }
 
 void FMController::create() {
-    std::vector<std::string> tables = {"CREATE TABLE PROJECTS (NAME TEXT NOT NULL, DESCRIPTION TEXT NOT NULL)",
-                                       "CREATE TABLE TRACKS (NAME TEXT NOT NULL, START_TIME REAL, END_TIME REAL)"
+    std::vector<std::string> tables = {"CREATE TABLE PROJECTS (NAME TEXT PRIMARY KEY, DESCRIPTION TEXT NOT NULL)",
+                                       "CREATE TABLE TRACKS (NAME TEXT NOT NULL, START_TIME INTEGER, END_TIME INTEGER)"
     };
-    
+
     Statement createStmt;
     for (const auto & creation : tables) {
         createStmt.prepare(this->mDB, creation.c_str());
@@ -85,7 +85,7 @@ void FMController::stopTimeForProject(std::string const& name) {
     std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
     
     Statement stmt;
-    stmt.prepare(this->mDB, "UPDATE TRACKS SET END_TIME = ?1 WHERE NAME = ?2", (const double)t, name);
+    stmt.prepare(this->mDB, "UPDATE TRACKS SET END_TIME = ?1 WHERE NAME = ?2", (const long long)t, name);
     stmt.execute();
     std::cout << "Done\n";
 }
@@ -96,36 +96,34 @@ void FMController::startTimeForProject(std::string const& name) {
     std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
     
     Statement stmt;
-    stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2, NULL)", name, (const double)t);
+    stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2, NULL)", name, (const long long)t);
     stmt.execute();
     std::cout << "Done\n";
 }
 
 void FMController::showLatestDuration(std::string const& name) {
-  
+
   Statement stmt;
   stmt.prepare(this->mDB, "SELECT NAME, MAX(START_TIME), END_TIME FROM TRACKS WHERE NAME = ?1", name);
-  
+
   for (Row r : stmt) {
-    double s_time = r.getInt(1);
-    double e_time = r.getInt(2);
-    std::cout << r.getString(0) << " " << r.getInt(1) << " " << r.getInt(2) <<  "\n";
+    long long  s_time = r.getLong(1);
+    long long  e_time = r.getLong(2);
 
     if (e_time != 0) {
-      double diff = e_time - s_time;
+      long long diff = e_time - s_time;
       int factor = 3600;
       std::string metrics = "hours";
       if (diff < factor) {
 	factor = 60;
 	metrics = "minutes";
       }
-      
+ 
       std::cout << "Latest time spent " << diff/factor << " " << metrics << "\n";
     }
   }
   std::cout << "Done\n";
 }
-
 
 FMController::~FMController() {
 }
