@@ -82,10 +82,10 @@ void FMController::addProjects(std::string const& name, std::string const& descr
 void FMController::stopTimeForProject(std::string const& name) {
 
     auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
+    std::cout << "Setting end date and time for " << name << " to " << std::ctime(&t) << std::endl;
     
     Statement stmt;
-    stmt.prepare(this->mDB, "UPDATE TRACKS SET END_TIME = ?1 WHERE NAME = ?2", (const long long)t, name);
+    stmt.prepare(this->mDB, "UPDATE TRACKS SET END_TIME = ?1 WHERE NAME = ?2 and END_TIME = ?3", (const long long)t, name, 0);
     stmt.execute();
     std::cout << "Done\n";
 }
@@ -96,7 +96,7 @@ void FMController::startTimeForProject(std::string const& name) {
     std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
     
     Statement stmt;
-    stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2, NULL)", name, (const long long)t);
+    stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2, 0)", name, (const long long)t);
     stmt.execute();
     std::cout << "Done\n";
 }
