@@ -30,11 +30,11 @@ public:
 
 protected:
   void create();
-  void addProjects(std::string const& name, std::string const& project);
-  void startTimeForProject(std::string const& name);
-  void stopTimeForProject(std::string const& name);
-  void showLatestDuration(std::string const& name);
-  void showTotalTimeSpentTodayForProject(std::string const& name);
+  void addProjects(std::vector<std::string> const& arguments);
+  void startTimeForProject(std::vector<std::string> const& arguments);
+  void stopTimeForProject(std::vector<std::string> const& arguments);
+  void showLatestDuration(std::vector<std::string> const& arguments);
+  void showTotalTimeSpentTodayForProject(std::vector<std::string> const& arguments);
   void showProjects();
 
 private:

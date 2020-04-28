@@ -49,55 +49,12 @@ void FMController::executeCommand(int argc, const char *argv[]) {
   }
 
   Switch s;
-  s.add_case("projects", [&](){
-			   this->showProjects();
-                         });
-
-  s.add_case("add",[&](){
-                     if (argc < 3) {
-                       std::cout << "add <project-name> <project description>\n";
-                       return;
-                     }
-                     
-                     this->addProjects(cmd_arguments[0], cmd_arguments[1]);
-                   });
-  
-  s.add_case("time", [&]() {
-                       if (argc < 2) {
-                         std::cout << "time <project-name>\n";
-                         return;
-                       }
-                       
-                       this->startTimeForProject(cmd_arguments[0]);
-                     });
- 
-  s.add_case("stop", [&](){
-                       if (argc < 2) {
-                         std::cout << "stop <project-name>\n";
-                         return;
-                       }
-                      
-                       this->stopTimeForProject(cmd_arguments[0]);
-                       
-                     });
-  
-  s.add_case("latest",[&](){
-                        if (argc < 2) {
-                          std::cout << "latest <project-name>\n";
-                          return;
-                        }
-                        
-                        this->showLatestDuration(cmd_arguments[0]);
-                      });
-  
-  s.add_case("today", [&]() {
-                        if (argc < 2) {
-                          std::cout << "today <project-name>\n";
-                          return;
-                        }
-                        
-                        this->showTotalTimeSpentTodayForProject(cmd_arguments[0]);
-                      });
+  s.add_case("projects", [&]{ this->showProjects(); });
+  s.add_case("add",      [&]{ this->addProjects(cmd_arguments); });
+  s.add_case("latest",   [&]{ this->showLatestDuration(cmd_arguments); });
+  s.add_case("time",     [&]{ this->startTimeForProject(cmd_arguments); });
+  s.add_case("stop",     [&]{ this->stopTimeForProject(cmd_arguments); });
+  s.add_case("today",    [&]{ this->showTotalTimeSpentTodayForProject(cmd_arguments); });
 
   s(command);
 }
@@ -115,37 +72,63 @@ void FMController::showProjects() {
   std::cout << "Done\n";
 }
 
-void FMController::addProjects(std::string const& name, std::string const& description) {
+void FMController::addProjects(std::vector<std::string> const& arguments) {
+  
+  if (arguments.size() < 3) {
+    std::cout << "add <project-name> <project description>\n";
+    return;
+  }
+
+  std::string name = arguments[0];
+  std::string description = arguments[1];  
   std::cout << "In add projects\n";
   Statement stmt;
   stmt.prepare(this->mDB, "INSERT INTO PROJECTS VALUES (?1, ?2)", name, description);
   stmt.execute();
 }
 
-void FMController::stopTimeForProject(std::string const& name) {
+void FMController::stopTimeForProject(std::vector<std::string> const& arguments) {
 
-    auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    std::cout << "Setting end date and time for " << name << " to " << std::ctime(&t) << std::endl;
+  if (arguments.size() < 1) {
+    std::cout << "stop <project-name>\n";
+    return;
+  }
 
-    Statement stmt;
-    stmt.prepare(this->mDB, "UPDATE TRACKS SET END_TIME = ?1 WHERE NAME = ?2 and END_TIME = ?3", (const long long)t, name, 0);
-    stmt.execute();
-    std::cout << "Done\n";
+  std::string name = arguments[0];
+  auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  std::cout << "Setting end date and time for " << name << " to " << std::ctime(&t) << std::endl;
+  
+  Statement stmt;
+  stmt.prepare(this->mDB, "UPDATE TRACKS SET END_TIME = ?1 WHERE NAME = ?2 and END_TIME = ?3", (const long long)t, name, 0);
+  stmt.execute();
+  std::cout << "Done\n";
 }
 
-void FMController::startTimeForProject(std::string const& name) {
-   
-    auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
-    
-    Statement stmt;
-    stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2, 0)", name, (const long long)t);
-    stmt.execute();
-    std::cout << "Done\n";
+void FMController::startTimeForProject(std::vector<std::string> const& arguments) {
+
+  if (arguments.size() < 1) {
+    std::cout << "time <project-name>\n";
+    return;
+  }
+
+  std::string name = arguments[0];
+  auto t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  std::cout << "Setting start date and time for " << name << " to " << std::ctime(&t) << std::endl;
+  
+  Statement stmt;
+  stmt.prepare(this->mDB, "INSERT INTO TRACKS VALUES (?1, ?2, 0)", name, (const long long)t);
+  stmt.execute();
+  std::cout << "Done\n";
 }
 
-void FMController::showLatestDuration(std::string const& name) {
+void FMController::showLatestDuration(std::vector<std::string> const& arguments) {
 
+  if (arguments.size() < 1) {
+    std::cout << "latest <project-name>\n";
+    return;
+  }
+                        
+  std::string name = arguments[0];
   Statement stmt;
   stmt.prepare(this->mDB, "SELECT NAME, MAX(START_TIME), END_TIME FROM TRACKS WHERE NAME = ?1", name);
 
@@ -168,8 +151,14 @@ void FMController::showLatestDuration(std::string const& name) {
   std::cout << "Done\n";
 }
 
-void FMController::showTotalTimeSpentTodayForProject(std::string const& name) {
+void FMController::showTotalTimeSpentTodayForProject(std::vector<std::string> const& arguments) {
 
+  if (arguments.size() < 1) {
+    std::cout << "today <project-name>\n";
+    return;
+  }
+
+  std::string name = arguments[0];
   auto rightnow = std::chrono::system_clock::now();
   auto rightnow_t = std::chrono::system_clock::to_time_t(rightnow);
   auto ltime = std::localtime(&rightnow_t);

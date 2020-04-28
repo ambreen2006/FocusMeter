@@ -7,6 +7,7 @@ struct Switch {
 
   using void_function = std::function<void(void)>;
   std::unordered_map<std::string, void_function> cases;
+
   void add_case(std::string const & key, void_function func) {
     cases[key] = func;
   }
