@@ -55,7 +55,7 @@ void FMController::executeCommand(int argc, const char *argv[]) {
   s.add_case("time",     [&]{ this->startTimeForProject(cmd_arguments); });
   s.add_case("stop",     [&]{ this->stopTimeForProject(cmd_arguments); });
   s.add_case("today",    [&]{ this->showTotalTimeSpentTodayForProject(cmd_arguments); });
-
+  s.add_case("help",     [keys = s.all_keys()]{ for (const auto& k: keys) {std::cout << k << "\n";} });
   s(command);
 }
 
@@ -74,7 +74,7 @@ void FMController::showProjects() {
 
 void FMController::addProjects(std::vector<std::string> const& arguments) {
   
-  if (arguments.size() < 3) {
+  if (arguments.size() < 2) {
     std::cout << "add <project-name> <project description>\n";
     return;
   }
